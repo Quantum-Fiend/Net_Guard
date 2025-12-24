@@ -1,0 +1,95 @@
+<Window x:Class="NetGuard.UI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:NetGuard.UI.Views"
+        xmlns:viewmodels="clr-namespace:NetGuard.UI.ViewModels"
+        mc:Ignorable="d"
+        Title="Net_Guard Hybrid IDS" Height="600" Width="1000"
+        Background="#1E1E1E">
+    
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
+            <views:DashboardView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:RulesViewModel}">
+            <views:RulesView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
+            <views:SettingsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ForensicsViewModel}">
+            <views:ForensicsView/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="#252526" BorderBrush="#3F3F46" BorderThickness="0,0,1,0">
+            <StackPanel Margin="10">
+                <TextBlock Text="NET_GUARD" Foreground="#007ACC" FontSize="20" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+                
+                <Button Content="Dashboard" Command="{Binding ShowDashboardCommand}" Margin="0,0,0,5" Padding="10" Background="#3E3E42" Foreground="White" BorderThickness="0"/>
+                <Button Content="Traffic Live" Margin="0,0,0,5" Padding="10" Background="Transparent" Foreground="#CCCCCC" BorderThickness="0"/>
+                <Button Content="Alerts" Margin="0,0,0,5" Padding="10" Background="Transparent" Foreground="#CCCCCC" BorderThickness="0"/>
+                <Button Content="Rules" Command="{Binding ShowRulesCommand}" Height="40" Background="Transparent" Foreground="#CCCCCC" BorderThickness="0" HorizontalContentAlignment="Left" Padding="15,0"/>
+                <Button Content="Forensics" Command="{Binding ShowForensicsCommand}" Height="40" Background="Transparent" Foreground="#CCCCCC" BorderThickness="0" HorizontalContentAlignment="Left" Padding="15,0"/>
+                <Button Content="Settings" Command="{Binding ShowSettingsCommand}" Height="40" Background="Transparent" Foreground="#CCCCCC" BorderThickness="0" HorizontalContentAlignment="Left" Padding="15,0"/>
+                
+                <TextBlock Text="STATUS" Foreground="#555555" FontSize="12" Margin="0,20,0,5"/>
+                <Border Background="#1E1E1E" Padding="10" CornerRadius="4">
+                    <StackPanel>
+                        <TextBlock Text="{Binding StatusMessage}" Foreground="White" TextWrapping="Wrap"/>
+                        <Button Content="{Binding IsCapturing, Converter={StaticResource BoolToStartStopConverter}}" 
+                        Command="{Binding ToggleCaptureCommand}"
+                        Width="120" Height="35" Margin="0,0,10,0"
+                        Background="{Binding IsCapturing, Converter={StaticResource BoolToColorConverter}}" 
+                        Foreground="White" FontSize="14" FontWeight="SemiBold"
+                        BorderThickness="0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button Content="{Binding IsPcapRecording, Converter={StaticResource BoolToRecordConverter}}" 
+                        Command="{Binding TogglePcapCommand}"
+                        Width="120" Height="35"
+                        Background="{Binding IsPcapRecording, Converter={StaticResource BoolToRecordColorConverter}}" 
+                        Foreground="White" FontSize="14" FontWeight="SemiBold"
+                        BorderThickness="0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </Border>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content -->
+        <ContentControl Grid.Column="1" Content="{Binding CurrentView}" Margin="20"/>
+
+        <!-- Notification Overlay -->
+        <Border Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" 
+                Background="{Binding NotificationColor}" CornerRadius="5" Padding="15,10"
+                Visibility="{Binding IsNotificationVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="⚠️" Foreground="White" FontSize="18" Margin="0,0,10,0"/>
+                <TextBlock Text="{Binding NotificationMessage}" Foreground="White" FontWeight="SemiBold" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.5"/>
+            </Border.Effect>
+        </Border>
+    </Grid>
+</Window>

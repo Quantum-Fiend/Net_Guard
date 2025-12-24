@@ -1,0 +1,53 @@
+{
+  "rules": [
+    {
+      "id": "WEB-001",
+      "name": "SQL Injection - UNION SELECT",
+      "pattern": "UNION\\s+SELECT",
+      "protocol": "TCP",
+      "port": 80,
+      "severity": "HIGH",
+      "attack_type": "SIGNATURE_MATCH"
+    },
+    {
+      "id": "WEB-002",
+      "name": "SQL Injection - OR 1=1",
+      "pattern": "OR\\s+1=1",
+      "protocol": "TCP",
+      "port": 80,
+      "severity": "HIGH"
+    },
+    {
+      "id": "WEB-003",
+      "name": "XSS Attack - Script Tag",
+      "pattern": "<script>",
+      "protocol": "TCP",
+      "port": 80,
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "WEB-004",
+      "name": "Directory Traversal",
+      "pattern": "../",
+      "protocol": "TCP",
+      "port": 80,
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "WEB-005",
+      "name": "Command Injection - Pipe",
+      "pattern": "|\\s*cat\\s",
+      "protocol": "TCP",
+      "port": 80,
+      "severity": "CRITICAL"
+    },
+    {
+      "id": "WEB-006",
+      "name": "PHP Code Injection",
+      "pattern": "<?php",
+      "protocol": "TCP",
+      "port": 80,
+      "severity": "CRITICAL"
+    }
+  ]
+}

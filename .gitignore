@@ -1,0 +1,46 @@
+# Build outputs
+bin/
+obj/
+build/
+*.dll
+*.exe
+*.pdb
+*.user
+*.suo
+
+# Visual Studio
+.vs/
+*.csproj.user
+
+# NuGet
+packages/
+*.nupkg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# Temporary files
+*.tmp
+*.temp
+
+# ML.NET models
+*.zip
+
+# PCAP files
+*.pcap
+
+# User settings
+settings.json

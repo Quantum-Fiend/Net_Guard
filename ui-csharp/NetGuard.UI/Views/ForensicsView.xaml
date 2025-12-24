@@ -1,0 +1,87 @@
+<UserControl x:Class="NetGuard.UI.Views.ForensicsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:NetGuard.UI.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=vm:ForensicsViewModel}"
+             Background="#1E1E1E">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Forensics Investigation" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <!-- Filters -->
+        <Border Grid.Row="1" Background="#2D2D2D" CornerRadius="5" Padding="15" Margin="0,0,0,20">
+            <WrapPanel>
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="Search" Foreground="#AAAAAA" Margin="0,0,0,5"/>
+                    <TextBox Text="{Binding SearchText}" Width="200" Padding="5" Background="#333333" Foreground="White" BorderThickness="0"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="Severity" Foreground="#AAAAAA" Margin="0,0,0,5"/>
+                    <ComboBox SelectedIndex="{Binding SelectedSeverityIndex}" Width="150" Padding="5">
+                        <ComboBoxItem Content="All Severities"/>
+                        <ComboBoxItem Content="Info"/>
+                        <ComboBoxItem Content="Low"/>
+                        <ComboBoxItem Content="Medium"/>
+                        <ComboBoxItem Content="High"/>
+                        <ComboBoxItem Content="Critical"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="Start Date" Foreground="#AAAAAA" Margin="0,0,0,5"/>
+                    <DatePicker SelectedDate="{Binding StartDate}" Width="120"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="End Date" Foreground="#AAAAAA" Margin="0,0,0,5"/>
+                    <DatePicker SelectedDate="{Binding EndDate}" Width="120"/>
+                </StackPanel>
+
+                <Button Content="Search Logs" Command="{Binding SearchCommand}" 
+                        Background="#007ACC" Foreground="White" BorderThickness="0" 
+                        Padding="15,5" VerticalAlignment="Bottom" Height="30"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- Results -->
+        <DataGrid Grid.Row="2" ItemsSource="{Binding FilteredAlerts}" AutoGenerateColumns="False" 
+                  Background="#2D2D2D" RowBackground="#2D2D2D" AlternatingRowBackground="#333333"
+                  HeadersVisibility="Column" BorderThickness="0" GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="#444444">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Time" Binding="{Binding Timestamp}" Width="160"/>
+                <DataGridTextColumn Header="Severity" Binding="{Binding Severity}" Width="80"/>
+                <DataGridTextColumn Header="Attack Type" Binding="{Binding AttackType}" Width="120"/>
+                <DataGridTextColumn Header="Source" Binding="{Binding Source}" Width="150"/>
+                <DataGridTextColumn Header="Destination" Binding="{Binding Destination}" Width="150"/>
+                <DataGridTextColumn Header="Rule" Binding="{Binding RuleName}" Width="150"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+            </DataGrid.Columns>
+            
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#333333"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Padding" Value="10,5"/>
+                    <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                    <Setter Property="BorderBrush" Value="#444444"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            
+            <DataGrid.Resources>
+                <Style TargetType="DataGridRow">
+                     <Setter Property="Foreground" Value="#DDDDDD"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+    </Grid>
+</UserControl>

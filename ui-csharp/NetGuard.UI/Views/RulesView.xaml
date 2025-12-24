@@ -1,0 +1,51 @@
+<UserControl x:Class="NetGuard.UI.Views.RulesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodels="clr-namespace:NetGuard.UI.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewmodels:RulesViewModel}">
+    <Border Background="#2D2D30" CornerRadius="5" Padding="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Detection Rules" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+            
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Rules}" AutoGenerateColumns="False" 
+                      Background="Transparent" BorderThickness="0" HeadersVisibility="Column"
+                      RowBackground="Transparent" Foreground="White" GridLinesVisibility="Horizontal">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="#AAAAAA"/>
+                        <Setter Property="Padding" Value="5"/>
+                    </Style>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridCell">
+                                    <Border Padding="{TemplateBinding Padding}" Background="Transparent">
+                                        <ContentPresenter />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="200"/>
+                    <DataGridTextColumn Header="Protocol" Binding="{Binding Protocol}" Width="100"/>
+                    <DataGridTextColumn Header="Severity" Binding="{Binding Severity}" Width="100"/>
+                    <DataGridTextColumn Header="Pattern" Binding="{Binding Pattern}" Width="*"/>
+                    <DataGridTextColumn Header="Source File" Binding="{Binding SourceFile}" Width="150" Foreground="#888888"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,45 @@
+{
+    "port_scan_config": {
+        "threshold_ports": 20,
+        "window_seconds": 5,
+        "severity": "HIGH"
+    },
+    "rules": [
+        {
+            "id": "SCAN-001",
+            "name": "SYN Scan Detection",
+            "description": "Detects TCP SYN scans (half-open scanning)",
+            "tcp_flags": "SYN",
+            "threshold_ports": 20,
+            "window_seconds": 5,
+            "severity": "HIGH"
+        },
+        {
+            "id": "SCAN-002",
+            "name": "FIN Scan Detection",
+            "description": "Detects TCP FIN stealth scans",
+            "tcp_flags": "FIN",
+            "threshold_ports": 15,
+            "window_seconds": 5,
+            "severity": "HIGH"
+        },
+        {
+            "id": "SCAN-003",
+            "name": "NULL Scan Detection",
+            "description": "Detects TCP NULL scans (no flags set)",
+            "tcp_flags": "NONE",
+            "threshold_ports": 10,
+            "window_seconds": 5,
+            "severity": "HIGH"
+        },
+        {
+            "id": "SCAN-004",
+            "name": "XMAS Scan Detection",
+            "description": "Detects TCP XMAS scans (FIN+PSH+URG flags)",
+            "tcp_flags": "FIN,PSH,URG",
+            "threshold_ports": 10,
+            "window_seconds": 5,
+            "severity": "CRITICAL"
+        }
+    ]
+}
