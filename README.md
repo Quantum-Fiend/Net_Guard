@@ -275,7 +275,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 **Project Maintainer**: [Tushar_Singh_Bisht]
 
 - GitHub: [@Quantum-Fiend]([https://github.com/yourusername](https://github.com/Quantum-Fiend))
-- Email: your.email@example.com
+- Email: tusharbisht706@gmail.com
 
 ---
 
