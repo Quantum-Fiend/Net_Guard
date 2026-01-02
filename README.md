@@ -272,9 +272,9 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 
 ## 📞 Contact
 
-**Project Maintainer**: [Your Name]
+**Project Maintainer**: [Tushar_Singh_Bisht]
 
-- GitHub: [@yourusername](https://github.com/yourusername)
+- GitHub: [@Quantum-Fiend]([https://github.com/yourusername](https://github.com/Quantum-Fiend))
 - Email: your.email@example.com
 
 ---
